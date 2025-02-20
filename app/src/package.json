@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "express": "^4.21.2",
+    "pino": "^9.6.0",
+    "pino-http-send": "^0.4.2"
+  }
+}
