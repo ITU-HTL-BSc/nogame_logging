@@ -12,5 +12,10 @@ pls download http-server :)
 
 ```zsh
 npm install --global http-server
+```
+
+run backend :)
+
+```zsh
 http-server app/frontend/src/public
 ```
