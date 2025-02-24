@@ -1,3 +1,3 @@
-setInterval(() => {
-  console.log("hej");
-}, 1000);
+while (true) {
+    console.log(Date.now());
+}
