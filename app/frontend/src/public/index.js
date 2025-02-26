@@ -1,4 +1,4 @@
-lines = 10000;
+lines = 1000;
 timeTotal = 0;
 countTests = 0;
 maxTests = 10;
