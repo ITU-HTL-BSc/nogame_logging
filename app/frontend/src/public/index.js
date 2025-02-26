@@ -22,4 +22,15 @@ const testFunction = () => {
     }
 }
 
-const interval = setInterval(testFunction, 2000);
+const sendLog = async (level, msg) => {
+    const response = await fetch("http://localhost:3000/log", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ level, msg })
+    });
+    return response;
+}
+
+const interval = setInterval(testFunction, 2000);w
