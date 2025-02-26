@@ -1,16 +1,25 @@
-// while (true) {
-//     console.log(Date.now());
-// }
-
-// setInterval(() => {
-//     console.log(Date.now());
-// }, 1000);
-
 lines = 10000;
-time_start = Date.now();
-for (let i = 0; i < lines; i++) {
-    console.log(`${Date.now()} - ${i}`);
+timeTotal = 0;
+countTests = 0;
+maxTests = 10;
+
+const testFunction = () => {
+    time_start = Date.now();
+    console.log(time_start);
+    for (let i = 1; i <= lines-1; i++) {
+        console.log(`${Date.now()} - ${i}`);
+    }
+    time_end = Date.now();
+    console.log(time_end);
+
+    countTests++;
+    timeTotal += time_end - time_start;
+    if (countTests >= maxTests) {
+        console.log(`Execution Time: ${timeTotal} ms`);
+        console.log(`Average Time: ${timeTotal / maxTests} ms`);
+        console.log(`Lines/ms: ${lines / (timeTotal / maxTests)}`);
+        clearInterval(interval);
+    }
 }
-time_end = Date.now();
-console.log(`Execution Time: ${time_end - time_start} ms`);
-console.log(`Lines/ms: ${lines / (time_end - time_start)}`);
+
+const interval = setInterval(testFunction, 2000);
