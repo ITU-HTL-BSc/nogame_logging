@@ -5,7 +5,7 @@
     "scripts": {
         "start": "node src/server.js",
         "docker:build": "docker build -t logging_backend -f ./Dockerfile .",
-        "docker:run": "docker run -p 3000:3000 logging_backend -d"
+        "docker:run": "docker run -p 3000:3000 -d logging_backend"
     },
     "keywords": [],
     "author": "",
