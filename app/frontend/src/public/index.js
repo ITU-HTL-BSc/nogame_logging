@@ -15,7 +15,8 @@ const logger = pino({
                     body: JSON.stringify({ level, msg })
                 });
             }
-        }
+        },
+        write: () => {}
     }
 });
 
@@ -25,12 +26,12 @@ let timeTotal = 0;
 let countTests = 0;
 
 const testFunction = () => {
-    const time_start = Date.now();
+    const time_start = performance.now();
     logger.info(time_start);
     for (let i = 1; i <= lines - 1; i++) {
-        logger.info(`${Date.now()} - ${i}`);
+        logger.info(`${performance.now()} - ${i}`);
     }
-    const time_end = Date.now();
+    const time_end = performance.now();
     logger.info(time_end);
 
     countTests++;
