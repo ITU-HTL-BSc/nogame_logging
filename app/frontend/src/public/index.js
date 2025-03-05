@@ -4,12 +4,12 @@ countTests = 0;
 maxTests = 10;
 
 const testFunction = () => {
-    time_start = Date.now();
+    time_start = performance.now();
     console.log(time_start);
     for (let i = 1; i <= lines-1; i++) {
-        console.log(`${Date.now()} - ${i}`);
+        console.log(`${performance.now()} - ${i}`);
     }
-    time_end = Date.now();
+    time_end = performance.now();
     console.log(time_end);
 
     countTests++;
