@@ -1,23 +1,34 @@
-const lines = 1000;
-const maxTests = 10;
-let timeTotal = 0;
-let countTests = 0;
+const logger = JL("performanceLogger");
+
+var ajaxAppender = JL.createAjaxAppender('ajaxAppender');
+ajaxAppender.setOptions({ 
+    "url": "http://localhost:3000/log", 
+    "batchSize": 1,
+    "maxBatchSize": 1,
+});
+
+JL().setOptions({ "appenders": [ajaxAppender] });
+
+lines = 1000;
+timeTotal = 0;
+countTests = 0;
+maxTests = 10;
 
 const testFunction = () => {
-    const time_start = performance.now();
-    console.log(time_start);
-    for (let i = 1; i <= lines-1; i++) {
-        console.log(`${performance.now()} - ${i}`);
+    time_start = performance.now();
+    logger.info(time_start);
+    for (let i = 1; i <= lines - 1; i++) {
+        logger.info(`${performance.now()} - ${i}`);
     }
-    const time_end = performance.now();
-    console.log(time_end);
+    time_end = performance.now();
+    logger.info(time_end);
 
     countTests++;
     timeTotal += time_end - time_start;
     if (countTests >= maxTests) {
-        console.log(`Execution Time: ${timeTotal} ms`);
-        console.log(`Average Time: ${timeTotal / maxTests} ms`);
-        console.log(`Lines/ms: ${lines / (timeTotal / maxTests)}`);
+        logger.info(`Execution Time: ${timeTotal} ms`);
+        logger.info(`Average Time: ${timeTotal / maxTests} ms`);
+        logger.info(`Lines/ms: ${lines / (timeTotal / maxTests)}`);
         clearInterval(interval);
     }
 }
