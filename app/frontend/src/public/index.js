@@ -1,15 +1,15 @@
-lines = 1000;
-timeTotal = 0;
-countTests = 0;
-maxTests = 10;
+const lines = 1000;
+const maxTests = 10;
+let timeTotal = 0;
+let countTests = 0;
 
 const testFunction = () => {
-    time_start = performance.now();
+    const time_start = performance.now();
     console.log(time_start);
     for (let i = 1; i <= lines-1; i++) {
         console.log(`${performance.now()} - ${i}`);
     }
-    time_end = performance.now();
+    const time_end = performance.now();
     console.log(time_end);
 
     countTests++;
