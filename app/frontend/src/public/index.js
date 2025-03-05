@@ -1,33 +1,36 @@
+import pino from 'https://cdn.skypack.dev/pino/browser';
+
 const logger = pino({
     browser: {
-      transmit: {
-        level: 'info',
-        send: (level, logEvent) => {
-          const msg = logEvent.messages[0];
-          fetch('/log', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ level, msg })
-          });
+        asObject: true,
+        transmit: {
+            level: 'info',
+            send: (level, logEvent) => {
+                const msg = logEvent.messages[0];
+                fetch('http://localhost:3000/log', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ level, msg })
+                });
+            }
         }
-      }
     }
-  });
+});
 
-lines = 1000;
-timeTotal = 0;
-countTests = 0;
-maxTests = 10;
+const lines = 1000;
+const maxTests = 10;
+let timeTotal = 0;
+let countTests = 0;
 
 const testFunction = () => {
-    time_start = Date.now();
+    const time_start = Date.now();
     logger.info(time_start);
-    for (let i = 1; i <= lines-1; i++) {
+    for (let i = 1; i <= lines - 1; i++) {
         logger.info(`${Date.now()} - ${i}`);
     }
-    time_end = Date.now();
+    const time_end = Date.now();
     logger.info(time_end);
 
     countTests++;
