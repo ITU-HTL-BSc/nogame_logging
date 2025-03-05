@@ -7,6 +7,10 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+app.get("/healthCheck", (_, res) => {
+    res.status(200).send({ status: "OK" });
+});
+
 app.post("/log", (req, res) => {
     const { level, msg } = req.body;
     logger[level](msg);
