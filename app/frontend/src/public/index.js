@@ -9,10 +9,10 @@ ajaxAppender.setOptions({
 
 JL().setOptions({ "appenders": [ajaxAppender] });
 
-lines = 1000;
-timeTotal = 0;
-countTests = 0;
-maxTests = 10;
+const lines = 1000;
+const maxTests = 10;
+let timeTotal = 0;
+let countTests = 0;
 
 const testFunction = () => {
     time_start = performance.now();
