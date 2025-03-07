@@ -1,4 +1,4 @@
-const Id = crypto.randomUUID();
+const id = crypto.randomUUID();
 
 const lines = 1000;
 const maxTests = 10;
@@ -28,7 +28,7 @@ const sendLog = async (level, msg) => {
     try {
         const response = await axios.post("http://localhost:3000/log", {
             level,
-            Id,
+            id: id,
             msg
         }, {
             headers: {
