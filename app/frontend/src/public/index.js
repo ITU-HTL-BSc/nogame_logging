@@ -1,5 +1,7 @@
 import pino from 'https://cdn.skypack.dev/pino/browser';
 
+const id = crypto.randomUUID();
+
 const logger = pino({
     browser: {
         asObject: true,
@@ -12,7 +14,7 @@ const logger = pino({
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({ level, msg })
+                    body: JSON.stringify({ level, id, msg })
                 });
             }
         },
