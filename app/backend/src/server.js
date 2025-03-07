@@ -12,8 +12,8 @@ app.get("/healthCheck", (_, res) => {
 });
 
 app.post("/log", (req, res) => {
-    const { level, msg } = req.body;
-    logger[level](msg);
+    const { level, ...logData } = req.body;
+    logger[level](logData);
     res.sendStatus(200);
 });
 
