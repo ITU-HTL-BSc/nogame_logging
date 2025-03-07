@@ -24,10 +24,10 @@ app.post("/log", (req, res) => {
 
     logs.forEach(log => {
         const level = levelMap[log.l];
-        const Id = log.n;
+        const id = log.n;
         const msg = log.m;
         
-        logger[level]({ Id }, msg);
+        logger[level]({ id }, msg);
     });
     res.sendStatus(200);
 });

@@ -1,6 +1,8 @@
-const logger = JL("performanceLogger");
+const id = crypto.randomUUID();
 
-var ajaxAppender = JL.createAjaxAppender('ajaxAppender');
+const logger = JL(`${id}`);
+
+var ajaxAppender = JL.createAjaxAppender(`${id}`);
 ajaxAppender.setOptions({ 
     "url": "http://localhost:3000/log", 
     "batchSize": 1,
