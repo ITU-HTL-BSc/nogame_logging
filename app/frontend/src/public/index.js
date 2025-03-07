@@ -1,4 +1,4 @@
-const Id = crypto.randomUUID();
+const id = crypto.randomUUID();
 
 const lines = 1000;
 const maxTests = 10;
@@ -30,7 +30,7 @@ const sendLog = async (level, msg) => {
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify({ level, Id, msg })
+        body: JSON.stringify({ level, id, msg })
     });
     return response;
 }
