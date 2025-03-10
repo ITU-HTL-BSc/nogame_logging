@@ -23,7 +23,7 @@ function dbInit(environment) {
     });
 }
 
-function insertMetrics(environment, uuid, exec_time, lines, tests) {
+function insertMetrics(environment, exec_time, lines, tests) {
     db.serialize(() => {
         db.run(
             `INSERT INTO metrics_${environment}  (exec_time, lines, tests)
