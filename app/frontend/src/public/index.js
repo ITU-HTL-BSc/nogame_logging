@@ -1,4 +1,4 @@
-import pino from 'https://cdn.skypack.dev/pino/browser';
+import pino from "https://cdn.skypack.dev/pino/browser";
 
 const id = crypto.randomUUID();
 
@@ -6,20 +6,20 @@ const logger = pino({
     browser: {
         asObject: true,
         transmit: {
-            level: 'info',
+            level: "info",
             send: (level, logEvent) => {
                 const msg = logEvent.messages[0];
-                fetch('http://localhost:3000/log', {
-                    method: 'POST',
+                fetch("http://localhost:3000/log", {
+                    method: "POST",
                     headers: {
-                        'Content-Type': 'application/json'
+                        "Content-Type": "application/json",
                     },
-                    body: JSON.stringify({ level, id, msg })
+                    body: JSON.stringify({ level, id, msg }),
                 });
-            }
+            },
         },
-        write: () => {}
-    }
+        write: () => {},
+    },
 });
 
 const lines = 1000;
@@ -29,12 +29,12 @@ let countTests = 0;
 
 const testFunction = () => {
     const time_start = performance.now();
-    logger.info(time_start);
+    logger.debug(time_start);
     for (let i = 1; i <= lines - 1; i++) {
-        logger.info(`${performance.now()} - ${i}`);
+        logger.debug(`${performance.now()} - ${i}`);
     }
     const time_end = performance.now();
-    logger.info(time_end);
+    logger.debug(time_end);
 
     countTests++;
     timeTotal += time_end - time_start;
@@ -44,6 +44,6 @@ const testFunction = () => {
         logger.info(`Lines/ms: ${lines / (timeTotal / maxTests)}`);
         clearInterval(interval);
     }
-}
+};
 
 const interval = setInterval(testFunction, 2000);
