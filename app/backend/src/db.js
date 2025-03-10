@@ -16,7 +16,6 @@ function dbInit(environment) {
         db.run(`
             CREATE TABLE IF NOT EXISTS metrics_${environment} (
                 id INTEGER PRIMARY KEY,
-                uuid TEXT,
                 exec_time REAL,
                 lines INTEGER,
                 tests INTEGER
@@ -27,9 +26,9 @@ function dbInit(environment) {
 function insertMetrics(environment, uuid, exec_time, lines, tests) {
     db.serialize(() => {
         db.run(
-            `INSERT INTO metrics_${environment}  (uuid, exec_time, lines, tests)
-            VALUES (?, ?, ?, ?)`,
-            [uuid, exec_time, lines, tests]
+            `INSERT INTO metrics_${environment}  (exec_time, lines, tests)
+            VALUES (?, ?, ?)`,
+            [exec_time, lines, tests]
         );
     });
 }
