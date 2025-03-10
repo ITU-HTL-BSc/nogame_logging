@@ -3,6 +3,7 @@ import pino from "https://cdn.skypack.dev/pino/browser";
 const id = crypto.randomUUID();
 
 const logger = pino({
+    customLevels: { metric: 35 },
     browser: {
         asObject: true,
         transmit: {
