@@ -2,12 +2,13 @@ const express = require("express");
 const cors = require("cors");
 const logger = require("./logger");
 const levelMap = {
-    1000: 'trace',    
-    2000: 'debug',    
-    3000: 'info',   
-    4000: 'warn',     
-    5000: 'error',    
-    6000: 'fatal',    
+    1000: 'trace',
+    2000: 'debug',
+    3000: 'info',
+    3500: 'metric',
+    4000: 'warn',
+    5000: 'error',
+    6000: 'fatal',
 };
 
 const app = express();
@@ -20,7 +21,7 @@ app.use(express.json());
 
 app.get("/healthCheck", (_, res) => {
     res.status(200).send({ status: "OK" });
-}); 
+});
 
 app.post("/log", (req, res) => {
 
@@ -30,7 +31,7 @@ app.post("/log", (req, res) => {
         const level = levelMap[log.l];
         const id = log.n;
         const msg = log.m;
-        
+
         addToSet(id, msg);
         logger[level]({ id }, msg);
     });

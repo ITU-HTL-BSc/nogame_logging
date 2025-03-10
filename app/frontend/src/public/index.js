@@ -17,20 +17,20 @@ let timeTotal = 0;
 let countTests = 0;
 
 const testFunction = () => {
-    time_start = performance.now();
+    const time_start = performance.now();
     logger.info(time_start);
     for (let i = 1; i < lines - 1; i++) {
         logger.info(`${performance.now()} - ${i}`);
     }
-    time_end = performance.now();
+    const time_end = performance.now();
     logger.info(time_end);
 
     countTests++;
     timeTotal += time_end - time_start;
     if (countTests >= maxTests) {
-        logger.info(`Execution Time: ${timeTotal} ms`);
-        logger.info(`Average Time: ${timeTotal / maxTests} ms`);
-        logger.info(`Lines/ms: ${lines / (timeTotal / maxTests)}`);
+        logger.log(3500, `Execution Time: ${timeTotal} ms`);
+        logger.log(3500, `Average Time: ${timeTotal / maxTests} ms`);
+        logger.log(3500, `Lines/ms: ${lines / (timeTotal / maxTests)}`);
         clearInterval(interval);
     }
 }
