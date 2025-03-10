@@ -6,7 +6,7 @@ let countTests = 0;
 const testFunction = () => {
     const time_start = performance.now();
     console.log(time_start);
-    for (let i = 1; i <= lines-1; i++) {
+    for (let i = 1; i < lines-1; i++) {
         console.log(`${performance.now()} - ${i}`);
     }
     const time_end = performance.now();
