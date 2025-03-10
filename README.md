@@ -2,8 +2,14 @@
 
 ## Start backend
 
+build docker image
 ```zsh
-node app/backend/src/server.js
+npm run docker:build
+```
+
+run docker image
+```zsh
+npm run docker:run
 ```
 
 ## Start frontend
