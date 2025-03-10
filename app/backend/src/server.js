@@ -39,4 +39,5 @@ function addToSet(id, msg) {
 const PORT = 3000;
 app.listen(PORT, () => {
     logger.info(`Server is running on port ${PORT}`);
+    console.log(`Server is running on port ${PORT}`);
 });
