@@ -29,19 +29,19 @@ let countTests = 0;
 
 const testFunction = () => {
     const time_start = performance.now();
-    logger.debug(time_start);
+    logger.info(time_start);
     for (let i = 1; i <= lines - 1; i++) {
-        logger.debug(`${performance.now()} - ${i}`);
+        logger.info(`${performance.now()} - ${i}`);
     }
     const time_end = performance.now();
-    logger.debug(time_end);
+    logger.info(time_end);
 
     countTests++;
     timeTotal += time_end - time_start;
     if (countTests >= maxTests) {
-        logger.info(`Execution Time: ${timeTotal} ms`);
-        logger.info(`Average Time: ${timeTotal / maxTests} ms`);
-        logger.info(`Lines/ms: ${lines / (timeTotal / maxTests)}`);
+        logger.metric(`Execution Time: ${timeTotal} ms`);
+        logger.metric(`Average Time: ${timeTotal / maxTests} ms`);
+        logger.metric(`Lines/ms: ${lines / (timeTotal / maxTests)}`);
         clearInterval(interval);
     }
 };
