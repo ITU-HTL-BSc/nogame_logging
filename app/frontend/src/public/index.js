@@ -30,7 +30,7 @@ let countTests = 0;
 const testFunction = () => {
     const time_start = performance.now();
     logger.info(time_start);
-    for (let i = 1; i <= lines - 1; i++) {
+    for (let i = 1; i < lines - 1; i++) {
         logger.info(`${performance.now()} - ${i}`);
     }
     const time_end = performance.now();
