@@ -13,6 +13,14 @@ const transport = pino.transport({
     options: { destination: logFile },
 });
 
-const logger = pino(transport);
+const logger = pino(
+    {
+        level: "info",
+        customLevels: {
+            metric: 35,
+        },
+    },
+    transport
+);
 
 module.exports = logger;
