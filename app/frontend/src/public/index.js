@@ -35,4 +35,4 @@ const sendLog = async (level, msg) => {
     return response;
 };
 
-const interval = setInterval(testFunction, 2000);
+testFunction();
