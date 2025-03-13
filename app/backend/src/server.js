@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const logger = require("./logger");
+const db = require("./db");
 
 const app = express();
 
@@ -36,7 +37,15 @@ function addToSet(id, msg) {
     idToLogs.get(id).add(msg);
 }
 
+app.post("/metric", (req, res) => {
+    const { _, id, msg } = req.body;
+    console.log(`${id}: ${msg}`);
+    //db.insertMetrics("env", id, exec_time, lines, tests);
+    res.sendStatus(200);
+});
+
 const PORT = 3000;
 app.listen(PORT, () => {
     logger.info(`Server is running on port ${PORT}`);
+    console.log(`Server is running on port ${PORT}`);
 });
