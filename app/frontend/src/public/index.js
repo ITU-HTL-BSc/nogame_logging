@@ -2,49 +2,49 @@ import pino from "https://cdn.skypack.dev/pino/browser";
 
 const id = crypto.randomUUID();
 
+let lastLogPromise = Promise.resolve();
+
 const logger = pino({
     customLevels: { metric: 35 },
     browser: {
         asObject: true,
         transmit: {
             level: "info",
-            send: (level, logEvent) => {
+            send: async (level, logEvent) => {
                 const msg = logEvent.messages[0];
-                fetch("http://localhost:3000/log", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({ level, id, msg }),
+
+                lastLogPromise = lastLogPromise.then(() => {
+                    return fetch("http://localhost:3000/log", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({ level, id, msg }),
+                    });
                 });
+
+                await lastLogPromise;
             },
         },
-        write: () => {},
+        write: () => { },
     },
 });
 
-const lines = 1000;
-const maxTests = 10;
-let timeTotal = 0;
-let countTests = 0;
+const lines = 10000;
 
-const testFunction = () => {
+const testFunction = async () => {
     const time_start = performance.now();
-    logger.info(time_start);
-    for (let i = 1; i < lines - 1; i++) {
+    for (let i = 0; i < lines; i++) {
         logger.info(`${performance.now()} - ${i}`);
     }
-    const time_end = performance.now();
-    logger.info(time_end);
 
-    countTests++;
-    timeTotal += time_end - time_start;
-    if (countTests >= maxTests) {
-        logger.metric(`Execution Time: ${timeTotal} ms`);
-        logger.metric(`Average Time: ${timeTotal / maxTests} ms`);
-        logger.metric(`Lines/ms: ${lines / (timeTotal / maxTests)}`);
-        clearInterval(interval);
-    }
+    await lastLogPromise;
+    const time_end = performance.now();
+
+    const timeTotal = time_end - time_start;
+
+    logger.metric(`Execution Time: ${timeTotal} ms`);
+    logger.metric(`Lines/ms: ${lines / timeTotal}`);
 };
 
-const interval = setInterval(testFunction, 2000);
+testFunction();
