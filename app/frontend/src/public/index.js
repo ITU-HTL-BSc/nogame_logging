@@ -1,27 +1,20 @@
 const id = crypto.randomUUID();
 
-const lines = 1000;
-const maxTests = 10;
-let timeTotal = 0;
-let countTests = 0;
+const lines = 10000;
 
-const testFunction = () => {
+const testFunction = async () => {
     const time_start = performance.now();
-    sendLog("info", time_start);
+    await sendLog("info", time_start);
     for (let i = 1; i < lines - 1; i++) {
-        sendLog("info", `${performance.now()} - ${i}`);
+        await sendLog("info", `${performance.now()} - ${i}`);
     }
     const time_end = performance.now();
-    sendLog("info", time_end);
+    await sendLog("info", time_end);
 
-    countTests++;
-    timeTotal += time_end - time_start;
-    if (countTests >= maxTests) {
-        sendLog("metric", `Execution Time: ${timeTotal} ms`);
-        sendLog("metric", `Average Time: ${timeTotal / maxTests} ms`);
-        sendLog("metric", `Lines/ms: ${lines / (timeTotal / maxTests)}`);
-        clearInterval(interval);
-    }
+    const timeTotal = time_end - time_start;
+
+    await sendLog("metric", `Execution Time: ${timeTotal} ms`);
+    await sendLog("metric", `Lines/ms: ${lines / timeTotal}`);
 };
 
 const sendLog = async (level, msg) => {
