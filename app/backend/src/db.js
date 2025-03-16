@@ -17,18 +17,17 @@ function dbInit(environment) {
             CREATE TABLE IF NOT EXISTS metrics_${environment} (
                 id INTEGER PRIMARY KEY,
                 exec_time REAL,
-                lines INTEGER,
-                tests INTEGER
+                lines_per_sec INTEGER
             )`);
     });
 }
 
-function insertMetrics(environment, exec_time, lines, tests) {
+function insertMetrics(environment, exec_time, lines_per_sec) {
     db.serialize(() => {
         db.run(
-            `INSERT INTO metrics_${environment}  (exec_time, lines, tests)
-            VALUES (?, ?, ?)`,
-            [exec_time, lines, tests]
+            `INSERT INTO metrics_${environment}  (exec_time, lines_per_sec)
+            VALUES (?, ?)`,
+            [exec_time, lines_per_sec]
         );
     });
 }

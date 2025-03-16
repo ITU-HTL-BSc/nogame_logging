@@ -17,6 +17,7 @@ const app = express();
 
 // map from id to set of log messages
 const idToLogs = new Map();
+const env = "main";
 
 app.use(cors());
 app.use(express.json());
@@ -57,9 +58,14 @@ function addToSet(id, msg) {
 }
 
 app.post("/metric", (req, res) => {
-    const { _, id, msg } = req.body;
-    console.log(`${id}: ${msg}`);
-    //db.insertMetrics("env", id, exec_time, lines, tests);
+    const { exec_time, lines_per_sec } = req.query;
+
+    if (!exec_time || !lines_per_sec) {
+        res.status(400).send("Missing metric parameters.");
+        return;
+    }
+    logger.metric(`Added metric: ${exec_time}, ${lines_per_sec}`);
+    db.insertMetrics(env, parseFloat(exec_time), parseFloat(lines_per_sec));
     res.sendStatus(200);
 });
 
@@ -67,4 +73,5 @@ const PORT = 3000;
 app.listen(PORT, () => {
     logger.info(`Server is running on port ${PORT}`);
     console.log(`Server is running on port ${PORT}`);
+    db.dbInit(env);
 });

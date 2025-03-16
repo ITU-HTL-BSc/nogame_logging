@@ -4,8 +4,8 @@
     "main": "index.js",
     "scripts": {
         "start": "node src/server.js",
-        "docker:build": "docker build -t logging_backend -f ./Dockerfile .",
-        "docker:run": "docker run -p 3000:3000 -d logging_backend"
+        "docker:build": "docker build --no-cache -t logging_backend -f ./Dockerfile .",
+        "docker:run": "docker run -p 3000:3000 -v $(pwd)/db:/usr/src/app/db -d logging_backend"
     },
     "keywords": [],
     "author": "",
