@@ -7,7 +7,7 @@ const app = express();
 
 // map from id to set of log messages
 const idToLogs = new Map();
-const env = "main";
+const env = "fetch";
 
 app.use(cors());
 app.use(express.json());
