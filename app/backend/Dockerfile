@@ -1,8 +1,8 @@
-FROM node:22.14
+FROM node:23.7.0
 
 WORKDIR /usr/src/app
 COPY ["package.json", "package-lock.json*", "npm-shrinkwrap.json*", "./"]
-RUN npm install
+RUN npm install --build-from-source
 COPY . . 
 
 EXPOSE 3000
