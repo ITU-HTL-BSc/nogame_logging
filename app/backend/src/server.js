@@ -4,20 +4,20 @@ const logger = require("./logger");
 const db = require("./db");
 
 const levelMap = {
-    1000: 'trace',
-    2000: 'debug',
-    3000: 'info',
-    3500: 'metric',
-    4000: 'warn',
-    5000: 'error',
-    6000: 'fatal',
+    1000: "trace",
+    2000: "debug",
+    3000: "info",
+    3500: "metric",
+    4000: "warn",
+    5000: "error",
+    6000: "fatal",
 };
 
 const app = express();
 
 // map from id to set of log messages
 const idToLogs = new Map();
-const env = "main";
+const env = "jsnlog";
 
 app.use(cors());
 app.use(express.json());
@@ -27,10 +27,9 @@ app.get("/healthCheck", (_, res) => {
 });
 
 app.post("/log", (req, res) => {
+    const { lg: logs = [] } = req.body;
 
-    const { lg: logs = [] } = req.body
-
-    logs.forEach(log => {
+    logs.forEach((log) => {
         const level = levelMap[log.l];
         const id = log.n;
         const msg = log.m;
