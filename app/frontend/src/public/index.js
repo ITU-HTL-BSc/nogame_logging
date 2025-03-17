@@ -43,8 +43,15 @@ const testFunction = async () => {
 
     const timeTotal = time_end - time_start;
 
-    logger.metric(`Execution Time: ${timeTotal} ms`);
-    logger.metric(`Lines/ms: ${lines / timeTotal}`);
+    await fetch(
+        `http://localhost:3000/metric?exec_time=${timeTotal}&lines_per_sec=${
+            lines / timeTotal
+        }`,
+        {
+            method: "POST",
+            mode: "cors",
+        }
+    );
 };
 
 testFunction();

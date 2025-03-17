@@ -17,7 +17,7 @@ function dbInit(environment) {
             CREATE TABLE IF NOT EXISTS metrics_${environment} (
                 id INTEGER PRIMARY KEY,
                 exec_time REAL,
-                lines_per_sec INTEGER
+                lines_per_sec REAL
             )`);
     });
 }
