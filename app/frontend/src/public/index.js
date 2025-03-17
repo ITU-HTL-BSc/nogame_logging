@@ -13,24 +13,19 @@ const testFunction = async () => {
 
     const timeTotal = time_end - time_start;
 
-    await fetch(
-        `http://localhost:3000/metric?exec_time=${timeTotal}&lines_per_sec=${
-            lines / timeTotal
-        }`,
-        {
-            method: "POST",
-            mode: "cors",
-        }
-    );
+    await axios.post(`http://localhost:3000/metric`, {
+        params: {
+            exec_time: timeTotal,
+            lines_per_sec: lines / timeTotal,
+        },
+    });
 };
 
 const sendLog = async (level, msg) => {
-    const response = await fetch("http://localhost:3000/log", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ level, id, msg }),
+    const response = await axios.post("http://localhost:3000/log", {
+        level,
+        id,
+        msg,
     });
     return response;
 };
