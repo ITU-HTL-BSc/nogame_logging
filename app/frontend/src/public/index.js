@@ -4,12 +4,10 @@ const lines = 10000;
 
 const testFunction = async () => {
     const time_start = performance.now();
-    await sendLog("info", time_start);
-    for (let i = 1; i < lines - 1; i++) {
+    for (let i = 0; i < lines; i++) {
         await sendLog("info", `${performance.now()} - ${i}`);
     }
     const time_end = performance.now();
-    await sendLog("info", time_end);
 
     const timeTotal = time_end - time_start;
 
