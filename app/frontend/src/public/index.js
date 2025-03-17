@@ -13,12 +13,11 @@ const testFunction = async () => {
 
     const timeTotal = time_end - time_start;
 
-    await axios.post(`http://localhost:3000/metric`, {
-        params: {
-            exec_time: timeTotal,
-            lines_per_sec: lines / timeTotal,
-        },
-    });
+    await axios.post(
+        `http://localhost:3000/metric?exec_time=${timeTotal}&lines_per_sec=${
+            lines / timeTotal
+        }`
+    );
 };
 
 const sendLog = async (level, msg) => {
