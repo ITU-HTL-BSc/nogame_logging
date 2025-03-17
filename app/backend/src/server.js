@@ -8,7 +8,7 @@ const app = express();
 // map from id to set of log messages
 const idToLogs = new Map();
 // implementation_docker/local_browser
-const env = "fetch_local_safari";
+const env = "axios_local_safari";
 
 app.use(cors());
 app.use(express.json());
