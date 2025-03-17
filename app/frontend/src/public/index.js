@@ -13,8 +13,15 @@ const testFunction = async () => {
 
     const timeTotal = time_end - time_start;
 
-    await sendLog("metric", `Execution Time: ${timeTotal} ms`);
-    await sendLog("metric", `Lines/ms: ${lines / timeTotal}`);
+    await fetch(
+        `http://localhost:3000/metric?exec_time=${timeTotal}&lines_per_sec=${
+            lines / timeTotal
+        }`,
+        {
+            method: "POST",
+            mode: "cors",
+        }
+    );
 };
 
 const sendLog = async (level, msg) => {
