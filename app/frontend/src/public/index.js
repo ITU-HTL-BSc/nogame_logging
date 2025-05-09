@@ -1,7 +1,5 @@
 import pino from "https://cdn.skypack.dev/pino/browser";
 
-const id = crypto.randomUUID();
-
 let lastLogPromise = Promise.resolve();
 
 const logger = pino({
@@ -19,7 +17,7 @@ const logger = pino({
                         headers: {
                             "Content-Type": "application/json",
                         },
-                        body: JSON.stringify({ level, id, msg }),
+                        body: JSON.stringify({ level, msg }),
                     });
                 });
 
@@ -35,7 +33,7 @@ const lines = 10000;
 const testFunction = async () => {
     const time_start = performance.now();
     for (let i = 0; i < lines; i++) {
-        logger.info(`${performance.now()} - ${i}`);
+        logger.info(`${i}`);
     }
 
     await lastLogPromise;
