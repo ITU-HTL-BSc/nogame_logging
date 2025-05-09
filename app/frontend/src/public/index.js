@@ -15,6 +15,9 @@ const testFunction = async () => {
     });
 };
 
-for (let i = 0; i < 20; i++) {
-    await testFunction();
-}
+(async () => {
+    for (let i = 0; i < 20; i++) {
+        await testFunction();
+        document.getElementById("counter").innerHTML = ` ${i}`;
+    }
+})();
