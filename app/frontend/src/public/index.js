@@ -26,7 +26,7 @@ const logger = pino({
                 await lastLogPromise;
             },
         },
-        write: () => { },
+        write: () => {},
     },
 });
 
@@ -41,17 +41,12 @@ const testFunction = async () => {
     await lastLogPromise;
     const time_end = performance.now();
 
-    const timeTotal = time_end - time_start;
+    const time_total = time_end - time_start;
 
-    await fetch(
-        `http://localhost:3000/metric?exec_time=${timeTotal}&lines_per_sec=${
-            lines / timeTotal
-        }`,
-        {
-            method: "POST",
-            mode: "cors",
-        }
-    );
+    await fetch(`http://localhost:3000/metric?exec_time=${time_total}`, {
+        method: "POST",
+        mode: "cors",
+    });
 };
 
 testFunction();
