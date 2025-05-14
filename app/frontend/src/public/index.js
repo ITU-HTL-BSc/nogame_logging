@@ -11,20 +11,16 @@ const logger = pino({
             send: async (level, logEvent) => {
                 const msg = logEvent.messages[0];
 
-                lastLogPromise = lastLogPromise.then(() => {
-                    return fetch("http://localhost:3000/log", {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json",
-                        },
-                        body: JSON.stringify({ level, msg }),
-                    });
+                lastLogPromise = fetch("http://localhost:3000/log", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({ level, msg }),
                 });
-
-                await lastLogPromise;
             },
         },
-        write: () => {},
+        write: () => { },
     },
 });
 
@@ -34,9 +30,9 @@ const testFunction = async () => {
     const time_start = performance.now();
     for (let i = 0; i < lines; i++) {
         logger.info(`${i}`);
+        await lastLogPromise;
     }
 
-    await lastLogPromise;
     const time_end = performance.now();
 
     const time_total = time_end - time_start;
