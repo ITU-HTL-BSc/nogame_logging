@@ -9,7 +9,7 @@ const testFunction = async () => {
         total_lines++;
     }
 
-    await fetch(`http://localhost:3000/metric?exec_time=${time_total}`, {
+    await fetch(`http://localhost:3000/metric?total_lines=${total_lines}`, {
         method: "POST",
         mode: "cors",
     });
