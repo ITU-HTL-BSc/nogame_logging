@@ -28,28 +28,26 @@ const logger = pino({
     },
 });
 
-const lines = 10000;
+const duration = 30000; // 30 seconds in milliseconds
 
 const testFunction = async () => {
     const time_start = performance.now();
-    for (let i = 0; i < lines; i++) {
-        logger.info(`${i}`);
+    let total_lines = 0;
+
+    while (performance.now() - time_start < duration) {
+        logger.info(`${total_lines}`);
+        total_lines++;
     }
 
-    await lastLogPromise;
-    const time_end = performance.now();
-
-    const time_total = time_end - time_start;
-
-    await fetch(`http://localhost:3000/metric?exec_time=${time_total}`, {
+    await fetch(`http://localhost:3000/metric?total_lines=${total_lines}`, {
         method: "POST",
         mode: "cors",
     });
 };
 
 (async () => {
-    for (let i = 0; i < 20; i++) {
+    for (let i = 0; i < 5; i++) {
         await testFunction();
-        document.getElementById("counter").innerHTML = ` ${i}`;
+        document.getElementById("counter").innerHTML = ` ${i + 1}`;
     }
 })();
