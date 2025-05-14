@@ -5,7 +5,7 @@ const testFunction = async () => {
     let total_lines = 0;
 
     while (performance.now() - time_start < duration) {
-        sendLog("info", `${total_lines}`);
+        await sendLog("info", `${total_lines}`);
         total_lines++;
     }
 
