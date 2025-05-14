@@ -1,13 +1,13 @@
-const lines = 10000;
+const duration = 30000; // 30 seconds in milliseconds
 
 const testFunction = async () => {
     const time_start = performance.now();
-    for (let i = 0; i < lines; i++) {
-        await sendLog("info", `${i}`);
-    }
-    const time_end = performance.now();
+    let total_lines = 0;
 
-    const time_total = time_end - time_start;
+    while (performance.now() - time_start < duration) {
+        sendLog("info", `${total_lines}`);
+        total_lines++;
+    }
 
     await fetch(`http://localhost:3000/metric?exec_time=${time_total}`, {
         method: "POST",
@@ -27,7 +27,7 @@ const sendLog = async (level, msg) => {
 };
 
 (async () => {
-    for (let i = 0; i < 20; i++) {
+    for (let i = 0; i < 5; i++) {
         await testFunction();
         document.getElementById("counter").innerHTML = ` ${i + 1}`;
     }
