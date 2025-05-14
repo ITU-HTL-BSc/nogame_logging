@@ -9,7 +9,7 @@ const testFunction = async () => {
         total_lines++;
     }
 
-    await axios.post(`http://localhost:3000/metric?exec_time=${time_total}`);
+    await axios.post(`http://localhost:3000/metric?total_lines=${total_lines}`);
 };
 
 const sendLog = async (level, msg) => {
