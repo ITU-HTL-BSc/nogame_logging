@@ -1,15 +1,15 @@
-const lines = 10000;
+const duration = 30000; // 30 seconds in milliseconds
 
 const testFunction = async () => {
     const time_start = performance.now();
-    for (let i = 0; i < lines; i++) {
-        console.log(`${i}`);
+    let total_lines = 0;
+
+    while (performance.now() - time_start < duration) {
+        console.log(`${iterations}`);
+        iterations++;
     }
-    const time_end = performance.now();
 
-    const time_total = time_end - time_start;
-
-    await fetch(`http://localhost:3000/metric?exec_time=${time_total}`, {
+    await fetch(`http://localhost:3000/metric?total_lines=${total_lines}`, {
         method: "POST",
         mode: "cors",
     });
