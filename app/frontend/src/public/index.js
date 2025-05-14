@@ -5,8 +5,8 @@ const testFunction = async () => {
     let total_lines = 0;
 
     while (performance.now() - time_start < duration) {
-        console.log(`${iterations}`);
-        iterations++;
+        console.log(`${total_lines}`);
+        total_lines++;
     }
 
     await fetch(`http://localhost:3000/metric?total_lines=${total_lines}`, {
@@ -16,8 +16,8 @@ const testFunction = async () => {
 };
 
 (async () => {
-    for (let i = 0; i < 20; i++) {
+    for (let i = 0; i < 5; i++) {
         await testFunction();
-        document.getElementById("counter").innerHTML = ` ${i}`;
+        document.getElementById("counter").innerHTML = ` ${i + 1}`;
     }
 })();
